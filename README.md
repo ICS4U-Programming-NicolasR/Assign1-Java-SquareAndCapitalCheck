@@ -1,0 +1,1 @@
+# Assign1-Java-SquareAndCapitalCheck
