@@ -39,7 +39,7 @@ public final class RectAndCapCheck {
     }
 
     /**
-     * This is the SQUARE_CHECK method.
+     * This is the capitalCheck method.
      *
      * @param characterCh //CHARACTER
      * @return boolean
@@ -47,6 +47,7 @@ public final class RectAndCapCheck {
      */
 
     public static boolean capitalCheck(final char characterCh) {
+        // The ascii maximum and minimum for capital letters
         final int ASCII_MIN = 65;
         final int ASCII_MAX = 90;
         boolean capital = false;
@@ -59,7 +60,7 @@ public final class RectAndCapCheck {
     }
 
     /**
-     * This is the LengthCalc method.
+     * This is the main method.
      *
      * @param args //unused
      *
@@ -71,6 +72,7 @@ public final class RectAndCapCheck {
         final String CAPITAL = "2";
         final String YES = "YES";
         final String Y = "Y";
+        // Create the maximums and the minimums for upper and lowercase letters
         final int ASCII_MINL = 65;
         final int ASCII_MAXL = 90;
         final int ASCII_MINU = 97;
@@ -79,18 +81,23 @@ public final class RectAndCapCheck {
         // Created a scanner object
         final Scanner INPUT_SCAN = new Scanner(System.in);
         do {
+            // Check which program the user wants to do
             System.out.println("What program would you like to do? 1 for"
                             + " square check, 2 for capital check");
             final String PROGRAM = INPUT_SCAN.nextLine();
+            // Rectangle program
             if (PROGRAM.equals(RECTANGLE)) {
+                // Get the user lengths
                 System.out.println("What is your length?");
                 final String LENGTH_STR = INPUT_SCAN.nextLine();
                 System.out.println("What is your width?");
                 final String WIDTH_STR = INPUT_SCAN.nextLine();
+                // Convert to double
                 try {
                     final double LENGTH_DUB = Double.parseDouble(LENGTH_STR);
                     final double WIDTH_DUB = Double.parseDouble(WIDTH_STR);
                     if (LENGTH_DUB > 0 && WIDTH_DUB > 0) {
+                        // Call the function to see if it is a square or not
                         final boolean SQUARE_CHECK = squareCheck(LENGTH_DUB,
                                                     WIDTH_DUB);
                         if (SQUARE_CHECK) {
@@ -100,40 +107,42 @@ public final class RectAndCapCheck {
                         }
                     } else {
                         System.out.println("You have entered a negative "
-                                        + "number");
+                                + "number");
                     }
+                // Catch for the try catch
                 } catch (NumberFormatException error) {
                     System.out.println("You entered a string! "
                             + "Please enter a real number\n"
                             + error);
                 }
+            // Capital program
             } else if (PROGRAM.equals(CAPITAL)) {
+                // Ask the user for the character
                 System.out.println("Please enter in your CHARACTER");
                 final String CHARACTER_STR = INPUT_SCAN.nextLine();
-                try {
-                    final char CHARACTER = CHARACTER_STR.charAt(0);
-                    if (CHARACTER >= ASCII_MINL && CHARACTER <= ASCII_MAXL
-                        || CHARACTER >= ASCII_MINU && CHARACTER <= ASCII_MAXU) {
-                        final boolean CHARACTER_CHECK = capitalCheck(CHARACTER);
-                        if (CHARACTER_CHECK) {
-                            System.out.println("You entered a capital!");
-                        } else {
-                            System.out.println("You have a lowercase letter!");
-                        }
+                // Convert the first input into a char
+                final char CHARACTER = CHARACTER_STR.charAt(0);
+                // Check if it is a letter
+                if (CHARACTER >= ASCII_MINL && CHARACTER <= ASCII_MAXL
+                    || CHARACTER >= ASCII_MINU && CHARACTER <= ASCII_MAXU) {
+                    // Call the function to check if it is a capital
+                    final boolean CHARACTER_CHECK = capitalCheck(CHARACTER);
+                    if (CHARACTER_CHECK) {
+                        System.out.println("You entered a capital!");
                     } else {
-                        System.out.println("You have entered a non letter"
-                                        + " value");
+                        System.out.println("You have a lowercase letter!");
                     }
-                } catch (NumberFormatException error) {
-                    System.out.println("You have entered a string "
-                            + "You must enter a real number\n"
-                            + error);
+                } else {
+                    System.out.println("You have entered a non letter"
+                                    + " value");
                 }
             } else {
-                System.out.println("You have not entered a real PROGRAM");
+                System.out.println("You have not entered a real program");
             }
+            // Ask the user if they want to play again
             System.out.println("Would you like to play again?");
             tryAgain = INPUT_SCAN.nextLine().toUpperCase();
+            // While loop to make it restart
         } while (tryAgain.equals(YES) || tryAgain.equals(Y));
         INPUT_SCAN.close();
     }
